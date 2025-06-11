@@ -1,0 +1,847 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <title>BDEFS-LF Survey for ADHD Symptoms</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0 auto; max-width: 900px; padding: 1rem; }
+    h1, h2 { text-align: center; }
+    .section-header { margin-top: 2rem; font-size: 1.2rem; font-weight: bold; }
+    .question { display: flex; flex-wrap: wrap; align-items: center; margin-bottom: 0.25rem; }
+    .question label { flex: 1 1 75%; }
+    .question select { flex: 0 0 80px; margin-left: 0.5rem; }
+    #submitBtn { display: block; margin: 1.5rem auto; padding: 0.5rem 1rem; font-size: 1rem; }
+    .results p { margin: 0.25rem 0; }
+    canvas { max-width: 100%; margin-bottom: 2rem; }
+  </style>
+</head>
+<body>
+  <h1>BDEFS-LF Survey for ADHD Symptoms</h1>
+<div class="scale-info">
+    <strong>Scale:</strong><br>
+    1 = Never or rarely<br>
+    2 = Sometimes<br>
+    3 = Often<br>
+    4 = Very often
+  </div>
+
+  <div style="text-align:center;margin-bottom:1rem;">
+    <label for="surveyDate"><strong>Date:</strong></label>
+    <input type="date" id="surveyDate">
+  </div>
+
+  <!-- Part 1: Static question form -->
+  <form id="surveyForm"><div class="section-header">Section 1</div><div class="question">
+      <label for="q1">1. Procrastinate or put off doing things until the last minute</label>
+      <select id="q1" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q2">2. Poor sense of time</label>
+      <select id="q2" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q3">3. Waste or mismanage my time</label>
+      <select id="q3" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q4">4. Not prepared on time for work or assigned tasks</label>
+      <select id="q4" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q5">5. Fail to meet deadlines for assignments</label>
+      <select id="q5" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q6">6. Have trouble planning ahead or preparing for upcoming events</label>
+      <select id="q6" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q7">7. Forget to do things I am supposed to do</label>
+      <select id="q7" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q8">8. Can’t seem to accomplish the goals I set for myself</label>
+      <select id="q8" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q9">9. Late for work or scheduled appointments</label>
+      <select id="q9" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q10">10. Can’t seem to hold in mind things I need to remember to do</label>
+      <select id="q10" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q11">11. Can’t seem to get things done unless there is an immediate deadline</label>
+      <select id="q11" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q12">12. Have difficulty judging how much time it will take to do something or get somewhere</label>
+      <select id="q12" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q13">13. Have trouble motivating myself to start work</label>
+      <select id="q13" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q14">14. Have difficulty motivating myself to stick with my work and get it done</label>
+      <select id="q14" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q15">15. Not motivated to prepare in advance for things I know I am supposed to do</label>
+      <select id="q15" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q16">16. Have trouble completing one activity before starting into a new one</label>
+      <select id="q16" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q17">17. Have trouble doing what I tell myself to do</label>
+      <select id="q17" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q18">18. Difficulties following through on promises or commitments I may make to others</label>
+      <select id="q18" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q19">19. Lack self‑discipline</label>
+      <select id="q19" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q20">20. Have difficulty arranging or doing my work by its priority or importance; can’t “prioritize” well</label>
+      <select id="q20" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q21">21. Find it hard to get started or get going on things I need to get done</label>
+      <select id="q21" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="section-header">Section 2</div><div class="question">
+      <label for="q22">22. I do not seem to anticipate the future as much or as well as others</label>
+      <select id="q22" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q23">23. Can’t seem to remember what I previously heard or read about</label>
+      <select id="q23" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q24">24. I have trouble organizing my thoughts</label>
+      <select id="q24" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q25">25. When I am shown something complicated to do, I cannot keep the information in mind so as to imitate or do it correctly</label>
+      <select id="q25" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q26">26. I have trouble considering various options for doing things and weighing their consequences</label>
+      <select id="q26" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q27">27. Have difficulties saying what I want to say</label>
+      <select id="q27" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q28">28. Unable to come up with or invent as many solutions to problems as others seem to do</label>
+      <select id="q28" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q29">29. Find myself at a loss for words when I want to explain something to others</label>
+      <select id="q29" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q30">30. Have trouble putting my thoughts down in writing as well or as quickly as others</label>
+      <select id="q30" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q31">31. Feel I am not as creative or inventive as others of my level of intelligence</label>
+      <select id="q31" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q32">32. In trying to accomplish goals or assignments, I find I am not able to think of as many ways of doing things as others</label>
+      <select id="q32" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q33">33. Have trouble learning new or complex activities as well as others</label>
+      <select id="q33" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q34">34. Have difficulty explaining things in their proper order or sequence</label>
+      <select id="q34" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q35">35. Can’t seem to get to the point of my explanations as quickly as others</label>
+      <select id="q35" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q36">36. Have trouble doing things in their proper order or sequence</label>
+      <select id="q36" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q37">37. Unable to “think on my feet” or respond as effectively as others to unexpected events</label>
+      <select id="q37" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q38">38. I am slower than others at solving problems I encounter in my daily life</label>
+      <select id="q38" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q39">39. Easily distracted by irrelevant events or thoughts when I must concentrate on something</label>
+      <select id="q39" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q40">40. Not able to comprehend what I read as well as I should be able to do; have to reread material to get its meaning</label>
+      <select id="q40" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q41">41. Cannot focus my attention on tasks or work as well as others</label>
+      <select id="q41" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q42">42. Easily confused</label>
+      <select id="q42" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q43">43. Can’t seem to sustain my concentration on reading, paperwork, lectures, or work</label>
+      <select id="q43" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q44">44. Find it hard to focus on what is important from what is not important when I do things</label>
+      <select id="q44" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q45">45. I don’t seem to process information as quickly or as accurately as others</label>
+      <select id="q45" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="section-header">Section 3</div><div class="question">
+      <label for="q46">46. Find it difficult to tolerate waiting; impatient</label>
+      <select id="q46" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q47">47. Make decisions impulsively</label>
+      <select id="q47" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q48">48. Unable to inhibit my reactions or responses to events or others</label>
+      <select id="q48" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q49">49. Have difficulty stopping my activities or behavior when I should do so</label>
+      <select id="q49" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q50">50. Have difficulty changing my behavior when I am given feedback about my mistakes</label>
+      <select id="q50" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q51">51. Make impulsive comments to others</label>
+      <select id="q51" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q52">52. Likely to do things without considering the consequences for doing them</label>
+      <select id="q52" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q53">53. Change my plans at the last minute on a whim or last‑minute impulse</label>
+      <select id="q53" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q54">54. Fail to consider past relevant events or past personal experiences before responding to situations (I act without thinking)</label>
+      <select id="q54" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q55">55. Not aware of things I say or do</label>
+      <select id="q55" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q56">56. Have difficulty being objective about things that affect me</label>
+      <select id="q56" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q57">57. Find it hard to take other people’s perspectives about a problem or situation</label>
+      <select id="q57" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q58">58. Don’t think about or talk things over with myself before doing something</label>
+      <select id="q58" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q59">59. Trouble following the rules in a situation</label>
+      <select id="q59" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q60">60. More likely to drive a motor vehicle much faster than others (excessive speeding)</label>
+      <select id="q60" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q61">61. Have a low tolerance for frustrating situations</label>
+      <select id="q61" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q62">62. Cannot inhibit my emotions as well as others</label>
+      <select id="q62" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q63">63. I don’t look ahead and think about what the future outcomes will be before I do something (I don’t use my foresight)</label>
+      <select id="q63" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q64">64. I engage in risk‑taking activities more than others are likely to do</label>
+      <select id="q64" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="section-header">Section 4</div><div class="question">
+      <label for="q65">65. Likely to take short cuts in my work and not do all that I am supposed to do</label>
+      <select id="q65" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q66">66. Likely to skip out on work early if my work is boring to do</label>
+      <select id="q66" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q67">67. Do not put as much effort into my work as I should or than others are able to do</label>
+      <select id="q67" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q68">68. Others tell me I am lazy or unmotivated</label>
+      <select id="q68" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q69">69. Have to depend on others to help me get my work done</label>
+      <select id="q69" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q70">70. Things must have an immediate payoff for me or I do not seem to get them done</label>
+      <select id="q70" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q71">71. Have difficulty resisting the urge to do something fun or more interesting when I am supposed to be working</label>
+      <select id="q71" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q72">72. Inconsistent in the quality or quantity of my work performance</label>
+      <select id="q72" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q73">73. Unable to work as well as others without supervision or frequent instruction</label>
+      <select id="q73" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q74">74. I do not have the willpower or determination that others seem to have</label>
+      <select id="q74" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q75">75. I am not able to work toward longer‑term or delayed rewards as well as others</label>
+      <select id="q75" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q76">76. I cannot resist doing things that produce immediate rewards even if they are not good for me in the long run</label>
+      <select id="q76" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="section-header">Section 5</div><div class="question">
+      <label for="q77">77. Quick to get angry or become upset</label>
+      <select id="q77" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q78">78. Overreact emotionally</label>
+      <select id="q78" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q79">79. Easily excitable</label>
+      <select id="q79" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q80">80. Unable to inhibit showing strong negative or positive emotions</label>
+      <select id="q80" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q81">81. Have trouble calming myself down once I am emotionally upset</label>
+      <select id="q81" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q82">82. Cannot seem to regain emotional control and become more reasonable once I am emotional</label>
+      <select id="q82" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q83">83. Cannot seem to distract myself away from whatever is upsetting me emotionally to help calm me down; I can’t refocus my mind to a more positive framework</label>
+      <select id="q83" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q84">84. Unable to manage my emotions in order to accomplish my goals successfully or get along well with others</label>
+      <select id="q84" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q85">85. I remain emotional or upset longer than others</label>
+      <select id="q85" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q86">86. I find it difficult to walk away from emotionally upsetting encounters with others or leave situations in which I have become very emotional</label>
+      <select id="q86" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q87">87. I cannot rechannel or redirect my emotions into more positive ways or outlets when I get upset</label>
+      <select id="q87" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q88">88. I am not able to evaluate an emotionally upsetting event more objectively</label>
+      <select id="q88" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div><div class="question">
+      <label for="q89">89. I cannot redefine negative events into more positive viewpoints when I feel strong emotions</label>
+      <select id="q89" required="">
+        <option value="">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select></div></form>
+
+  <!-- Submission button -->
+  <button type="button" id="submitBtn">Save &amp; Calculate</button>
+
+  <!-- Current results -->
+  <div class="results" id="results" style="display:none;">
+    <h2>Current Results</h2>
+    <p id="sec1"></p>
+    <p id="sec2"></p>
+    <p id="sec3"></p>
+    <p id="sec4"></p>
+    <p id="sec5"></p>
+    <p id="totalRaw"></p>
+    <p id="summaryCount"></p>
+    <p id="adhd"></p>
+  </div>
+
+  <!-- Part 2: Static graphs -->
+  <div id="charts" style="margin-top:2rem;">
+    <h2>Historical Trends</h2>
+    <canvas id="chartSec1" width="460" height="231" style="display: block; box-sizing: border-box; height: 256px; width: 512px;"></canvas>
+    <canvas id="chartSec2" width="460" height="231" style="display: block; box-sizing: border-box; height: 256px; width: 512px;"></canvas>
+    <canvas id="chartSec3" width="460" height="231" style="display: block; box-sizing: border-box; height: 256px; width: 512px;"></canvas>
+    <canvas id="chartSec4" width="460" height="231" style="display: block; box-sizing: border-box; height: 256px; width: 512px;"></canvas>
+    <canvas id="chartSec5" width="460" height="231" style="display: block; box-sizing: border-box; height: 256px; width: 512px;"></canvas>
+    <canvas id="chartTotal" width="460" height="231" style="display: block; box-sizing: border-box; height: 256px; width: 512px;"></canvas>
+    <canvas id="chartSummary" width="460" height="231" style="display: block; box-sizing: border-box; height: 256px; width: 512px;"></canvas>
+    <canvas id="chartADHD" width="460" height="231" style="display: block; box-sizing: border-box; height: 256px; width: 512px;"></canvas>
+  </div>
+
+  <script>
+    // ---------- Configuration ----------
+    const adhdIndexItems = [1,6,14,16,24,49,50,55,60,65,69];
+    const chartMaxValues = { sec1:84, sec2:92, sec3:72, sec4:44, sec5:48, total:356, summary:89, adhd:44 };
+
+    // ---------- Calculate scores ----------
+    function calculateScores() {
+      const sec = [0,0,0,0,0,0];
+      let total = 0, summary = 0, adhd = 0;
+      for (let i = 1; i <= 89; i++) {
+        const val = parseInt(document.getElementById(`q${i}`).value);
+        if (isNaN(val)) return null;
+        const section = /* determine section by question index, e.g.: */
+          i <= 21 ? 1 : i <= 45 ? 2 : i <= 64 ? 3 : i <= 76 ? 4 : 5;
+        sec[section] += val;
+        total += val;
+        if (val >= 3) summary++;
+        if (adhdIndexItems.includes(i)) adhd += val;
+      }
+      return { sec1:sec[1], sec2:sec[2], sec3:sec[3], sec4:sec[4], sec5:sec[5], total, summary, adhd };
+    }
+
+    // ---------- Storage ----------
+    function loadHistory() { return JSON.parse(localStorage.getItem('surveyResults')||'[]'); }
+    function saveEntry(e) { const h=loadHistory(); h.push(e); localStorage.setItem('surveyResults', JSON.stringify(h)); }
+
+    // ---------- Display ----------
+    function displayResults(r) {
+      document.getElementById('results').style.display='block';
+      document.getElementById('sec1').textContent=`Section&nbsp;1: ${r.sec1}`;
+      document.getElementById('sec2').textContent=`Section&nbsp;2: ${r.sec2}`;
+      document.getElementById('sec3').textContent=`Section&nbsp;3: ${r.sec3}`;
+      document.getElementById('sec4').textContent=`Section&nbsp;4: ${r.sec4}`;
+      document.getElementById('sec5').textContent=`Section&nbsp;5: ${r.sec5}`;
+      document.getElementById('totalRaw').textContent=`Total&nbsp;Raw&nbsp;Points: ${r.total}`;
+      document.getElementById('summaryCount').textContent=`EF&nbsp;Summary&nbsp;Count: ${r.summary}`;
+      document.getElementById('adhd').textContent=`ADHD‑EF&nbsp;Index: ${r.adhd}`;
+    }
+
+    // ---------- Charts ----------
+    function renderChart(id,label,key,maxKey){
+      const ctx=document.getElementById(id).getContext('2d');
+      const hist=loadHistory();
+      new Chart(ctx,{ type:'line', data:{ labels:hist.map(e=>e.date), datasets:[{label,data:hist.map(e=>e[key]),borderWidth:2,fill:false}] }, options:{ responsive:true, scales:{ y:{ beginAtZero:true, max:chartMaxValues[maxKey] } } } });
+    }
+    function renderAllCharts(){
+      renderChart('chartSec1','Section&nbsp;1','sec1','sec1');
+      renderChart('chartSec2','Section&nbsp;2','sec2','sec2');
+      renderChart('chartSec3','Section&nbsp;3','sec3','sec3');
+      renderChart('chartSec4','Section&nbsp;4','sec4','sec4');
+      renderChart('chartSec5','Section&nbsp;5','sec5','sec5');
+      renderChart('chartTotal','Total&nbsp;Raw&nbsp;Points','total','total');
+      renderChart('chartSummary','EF&nbsp;Summary&nbsp;Count','summary','summary');
+      renderChart('chartADHD','ADHD‑EF&nbsp;Index','adhd','adhd');
+    }
+
+    // ---------- Events ----------
+    document.getElementById('submitBtn').onclick=function(){
+      const scores=calculateScores(); if(!scores){alert('Complete all questions');return;}
+      const date=document.getElementById('surveyDate').value||new Date().toISOString().split('T')[0];
+      saveEntry({date,...scores}); displayResults(scores); renderAllCharts();
+    };
+
+    // ---------- Init ----------
+    window.onload=function(){
+      document.getElementById('surveyDate').value=new Date().toISOString().split('T')[0];
+      renderAllCharts();
+    };
+  </script>
+
+
+</body></html>
